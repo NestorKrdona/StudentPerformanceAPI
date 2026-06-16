@@ -441,15 +441,15 @@ def internal_error(error):
 # INICIALIZACIÓN
 # ============================================================================
 
+# Cargar modelos al iniciar (se ejecuta siempre, incluso con Gunicorn)
+print("="*80)
+print("🚀 INICIANDO STUDENT PERFORMANCE API")
+print("="*80)
+load_model()
+print("="*80 + "\n")
+
 if __name__ == '__main__':
-    print("="*80)
-    print("🚀 INICIANDO STUDENT PERFORMANCE API")
-    print("="*80)
-
-    # Cargar modelo
-    load_model()
-
-    # Configuración del servidor
+    # Configuración del servidor (solo para desarrollo)
     port = int(os.environ.get('PORT', 5000))
     debug = os.environ.get('DEBUG', 'False') == 'True'
 
