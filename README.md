@@ -275,12 +275,13 @@ Instance Type: Free (o Starter si necesitas más recursos)
 ```bash
 PYTHON_VERSION=3.9.20
 DEBUG=False
-PORT=5000
 ```
 
 ### Paso 5: Deploy
 
 Hacer clic en **Create Web Service**. El deploy toma ~5-10 minutos.
+
+(https://studentperformanceapi.onrender.com)
 
 ### Verificar Deploy
 
@@ -538,24 +539,6 @@ curl -X POST https://your-app.onrender.com/api/predict/batch \
   -d '{"students": [{...}, {...}]}'
 ```
 
----
-
-## 📊 Cumplimiento de Criterios de Aceptación
-
-| Criterio | Peso | Estado | Detalles |
-|----------|------|--------|----------|
-| Construir modelo supervisado | 20% | ✅ | SVR optimizado + Ensemble Voting |
-| Evaluar y mejorar desempeño | 20% | ✅ | R²=0.835, mejora +0.7% vs Taller 3 |
-| Configurar framework API | 10% | ✅ | Flask con gunicorn para producción |
-| Crear servidor de aplicaciones | 10% | ✅ | app.py con endpoints REST |
-| Serialización de modelos | 10% | ✅ | Pickle con scalers y metadata |
-| Crear API de acceso | 20% | ✅ | 4 endpoints + docs completas |
-| Pruebas de funcionamiento | 10% | ✅ | Probado en local y Render |
-
-**Total: 100%** ✅
-
----
-
 ## 🛠️ Tecnologías Utilizadas
 
 ### Backend
@@ -657,6 +640,7 @@ Maestría en Computación para el Desarrollo de Aplicaciones Inteligentes [CODIN
 
 **Nestor Cardona** - 202502968
 **Carlos Tovar** - 202503011
+**Yolima Guadir** - 202502581
 
 **Asignatura**: Aprendizaje de Máquina Aplicado
 **Periodo**: Semestre 2 - 2025
