@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation | Student Performance Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-book text-indigo-600 text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-gray-800">API Documentation</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+                        <i class="fas fa-home mr-2"></i>Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-xl p-8 text-white mb-8">
+            <h1 class="text-4xl font-bold mb-2">Student Performance Predictor API</h1>
+            <p class="text-lg opacity-90">API REST para predicción de rendimiento estudiantil usando Machine Learning</p>
+            <div class="mt-4 flex items-center space-x-4">
+                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">Version 1.0.0</span>
+                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">Base URL: /api</span>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Índice</h2>
+            <nav class="space-y-2">
+                <a href="#introduction" class="block text-indigo-600 hover:text-indigo-800">1. Introducción</a>
+                <a href="#authentication" class="block text-indigo-600 hover:text-indigo-800">2. Autenticación</a>
+                <a href="#endpoints" class="block text-indigo-600 hover:text-indigo-800">3. Endpoints</a>
+                <a href="#models" class="block text-indigo-600 hover:text-indigo-800">4. Modelos de Datos</a>
+                <a href="#examples" class="block text-indigo-600 hover:text-indigo-800">5. Ejemplos de Uso</a>
+                <a href="#errors" class="block text-indigo-600 hover:text-indigo-800">6. Códigos de Error</a>
+            </nav>
+        </div>
+
+        <!-- Introduction -->
+        <div id="introduction" class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-info-circle text-indigo-600 mr-3"></i>
+                Introducción
+            </h2>
+            <p class="text-gray-700 mb-4">
+                Esta API proporciona acceso a un modelo de Machine Learning optimizado para predecir el rendimiento
+                estudiantil basado en múltiples factores académicos, personales y socioeconómicos.
+            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <p class="text-sm text-blue-700">
+                    <strong>Modelos Disponibles:</strong> 3 modelos ML optimizados (SVR Ensemble, Gradient Boosting, Random Forest)<br>
+                    <strong>Optimización:</strong> Random Search con 50-100 iteraciones<br>
+                    <strong>Métricas del Mejor Modelo:</strong> R² = 0.8350 (Ensemble), RMSE = 6.05, MAE = 4.51
+                </p>
+            </div>
+        </div>
+
+        <!-- Authentication -->
+        <div id="authentication" class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-lock text-indigo-600 mr-3"></i>
+                Autenticación
+            </h2>
+            <p class="text-gray-700 mb-4">
+                <strong>Versión actual:</strong> La API no requiere autenticación. En producción se recomienda
+                implementar autenticación vía API Keys o JWT.
+            </p>
+        </div>
+
+        <!-- Endpoints -->
+        <div id="endpoints" class="space-y-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Endpoints</h2>
+
+            <!-- GET /api/health -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Health Check</h3>
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">GET</span>
+                </div>
+                <code class="bg-gray-100 px-3 py-1 rounded text-sm">/api/health</code>
+
+                <p class="text-gray-700 mt-4 mb-4">
+                    Verifica el estado del servidor y la disponibilidad del modelo.
+                </p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Respuesta (200 OK)</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "status": "ok",
+  "model_name": "Ensemble_Voting",
+  "model_metrics": {
+    "r2": 0.8350,
+    "rmse": 6.05,
+    "mae": 4.51
+  },
+  "trained_date": "2026-06-16T10:30:00",
+  "timestamp": "2026-06-16T12:00:00"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- GET /api/model/info -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Información del Modelo</h3>
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">GET</span>
+                </div>
+                <code class="bg-gray-100 px-3 py-1 rounded text-sm">/api/model/info</code>
+
+                <p class="text-gray-700 mt-4 mb-4">
+                    Obtiene información detallada del modelo, incluyendo métricas de todos los modelos entrenados.
+                </p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Respuesta (200 OK)</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "best_model": "Ensemble_Voting",
+  "best_model_metrics": {
+    "r2": 0.8350,
+    "rmse": 6.05,
+    "mae": 4.51
+  },
+  "all_models_metrics": {
+    "SVR_Optimized": {"r2": 0.8293, "rmse": 6.20, "mae": 4.66},
+    "GradientBoosting": {"r2": 0.8200, "rmse": 6.37, "mae": 4.90},
+    "RandomForest": {"r2": 0.8172, "rmse": 6.41, "mae": 4.78},
+    "Ensemble_Voting": {"r2": 0.8350, "rmse": 6.05, "mae": 4.51}
+  },
+  "feature_names": ["study_hours", "attendance", ...],
+  "num_features": 28,
+  "trained_date": "2026-06-16T10:30:00"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- GET /api/models/available -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Modelos Disponibles</h3>
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">GET</span>
+                </div>
+                <code class="bg-gray-100 px-3 py-1 rounded text-sm">/api/models/available</code>
+
+                <p class="text-gray-700 mt-4 mb-4">
+                    Lista todos los modelos de ML disponibles con sus métricas de rendimiento.
+                </p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Respuesta (200 OK)</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "available_models": {
+    "SVR_Optimized": {
+      "metrics": {
+        "r2": 0.8350,
+        "rmse": 6.05,
+        "mae": 4.51
+      },
+      "trained_date": "2026-06-16T10:30:00"
+    },
+    "GradientBoosting_Optimized": {
+      "metrics": {
+        "r2": 0.8229,
+        "rmse": 6.3126,
+        "mae": 4.8338
+      },
+      "trained_date": "2026-06-16T11:00:00"
+    },
+    "RandomForest_Optimized": {
+      "metrics": {
+        "r2": 0.8183,
+        "rmse": 6.3943,
+        "mae": 4.7309
+      },
+      "trained_date": "2026-06-16T11:30:00"
+    }
+  },
+  "default_model": "SVR_Optimized"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- POST /api/predict -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Predicción Individual</h3>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">POST</span>
+                </div>
+                <code class="bg-gray-100 px-3 py-1 rounded text-sm">/api/predict</code>
+
+                <p class="text-gray-700 mt-4 mb-4">
+                    Realiza una predicción de rendimiento estudiantil basada en los datos proporcionados.
+                </p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Headers</h4>
+                    <pre class="bg-gray-100 p-3 rounded"><code>Content-Type: application/json</code></pre>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Request Body</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "study_hours": 6,
+  "attendance": 90,
+  "sleep_hours": 8,
+  "internet_usage": 3,
+  "assignments_completed": 10,
+  "previous_score": 75,
+  "placement_status": "Placed"
+}</code></pre>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">⭐ Feature Engineering Automático</h4>
+                    <p class="text-sm text-blue-700 mb-2">Las siguientes features se calculan automáticamente:</p>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li><code class="bg-blue-100 px-2 py-1 rounded">cognitive_efficiency = study_hours / sleep_hours</code></li>
+                        <li><code class="bg-blue-100 px-2 py-1 rounded">academic_engagement = (assignments_completed × attendance) / 100</code></li>
+                        <li><code class="bg-blue-100 px-2 py-1 rounded">previous_score_quartile</code>: Q1(&lt;50), Q2(50-65), Q3(65-80), Q4(≥80)</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Parámetros</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Campo</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipo</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Descripción</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Valores</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200 text-sm">
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">study_hours</td>
+                                    <td class="px-4 py-3">float</td>
+                                    <td class="px-4 py-3">Horas de estudio diarias</td>
+                                    <td class="px-4 py-3">0.0 - 24.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">attendance</td>
+                                    <td class="px-4 py-3">float</td>
+                                    <td class="px-4 py-3">Porcentaje de asistencia</td>
+                                    <td class="px-4 py-3">0 - 100</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">sleep_hours</td>
+                                    <td class="px-4 py-3">float</td>
+                                    <td class="px-4 py-3">Horas de sueño</td>
+                                    <td class="px-4 py-3">0.0 - 24.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">internet_usage</td>
+                                    <td class="px-4 py-3">float</td>
+                                    <td class="px-4 py-3">Horas de uso de internet</td>
+                                    <td class="px-4 py-3">0.0 - 24.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">assignments_completed</td>
+                                    <td class="px-4 py-3">int</td>
+                                    <td class="px-4 py-3">Tareas completadas</td>
+                                    <td class="px-4 py-3">0 - 20</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">previous_score</td>
+                                    <td class="px-4 py-3">float</td>
+                                    <td class="px-4 py-3">Calificación anterior (se categoriza en cuartiles)</td>
+                                    <td class="px-4 py-3">0 - 100</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-mono">placement_status</td>
+                                    <td class="px-4 py-3">string</td>
+                                    <td class="px-4 py-3">Estado de colocación laboral (opcional)</td>
+                                    <td class="px-4 py-3">Placed, Not Placed</td>
+                                </tr>
+                                <tr class="bg-green-50">
+                                    <td class="px-4 py-3 font-mono">model_type</td>
+                                    <td class="px-4 py-3">string</td>
+                                    <td class="px-4 py-3">Modelo de ML a usar (opcional, por defecto: SVR_Optimized)</td>
+                                    <td class="px-4 py-3">SVR_Optimized, GradientBoosting_Optimized, RandomForest_Optimized</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Respuesta (200 OK)</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "prediction": 78.45,
+  "confidence_interval": {
+    "lower": 66.29,
+    "upper": 90.61
+  },
+  "performance_category": {
+    "category": "Bueno",
+    "description": "Rendimiento satisfactorio",
+    "alert_level": "info"
+  },
+  "model_used": "Ensemble_Voting",
+  "model_r2": 0.8350,
+  "timestamp": "2026-06-16T12:00:00"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- POST /api/predict/batch -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Predicción por Lotes</h3>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">POST</span>
+                </div>
+                <code class="bg-gray-100 px-3 py-1 rounded text-sm">/api/predict/batch</code>
+
+                <p class="text-gray-700 mt-4 mb-4">
+                    Realiza predicciones múltiples en una sola petición.
+                </p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Request Body</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "students": [
+    {
+      "study_hours": 5.5,
+      "attendance": 85,
+      ...
+    },
+    {
+      "study_hours": 3.0,
+      "attendance": 60,
+      ...
+    }
+  ]
+}</code></pre>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Respuesta (200 OK)</h4>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-json">{
+  "predictions": [
+    {
+      "student_id": 0,
+      "prediction": 78.45,
+      "performance_category": {...}
+    },
+    {
+      "student_id": 1,
+      "prediction": 62.30,
+      "performance_category": {...}
+    }
+  ],
+  "total": 2,
+  "successful": 2,
+  "model_used": "Ensemble_Voting",
+  "timestamp": "2025-01-15T12:00:00"
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Examples -->
+        <div id="examples" class="bg-white rounded-lg shadow-lg p-6 mb-8 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-code text-indigo-600 mr-3"></i>
+                Ejemplos de Uso
+            </h2>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">cURL</h3>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">curl -X POST https://your-api.com/api/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "study_hours": 5.5,
+    "attendance": 85,
+    "previous_score": 72,
+    "sleep_hours": 7,
+    "class_participation": 4,
+    "extracurricular": 1,
+    "parental_involvement": "High",
+    "motivation_level": "High",
+    "internet_access": 1,
+    "tutoring": 1,
+    "family_income": "Medium",
+    "teacher_quality": "High",
+    "school_type": "Public",
+    "peer_influence": "Positive",
+    "learning_disabilities": 0,
+    "gender": "Female"
+  }'</code></pre>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Python (requests)</h3>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-python">import requests
+
+url = "https://your-api.com/api/predict"
+data = {
+    "study_hours": 5.5,
+    "attendance": 85,
+    "previous_score": 72,
+    # ... resto de parámetros
+}
+
+response = requests.post(url, json=data)
+result = response.json()
+print(f"Predicción: {result['prediction']}")
+print(f"Categoría: {result['performance_category']['category']}")</code></pre>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">JavaScript (fetch)</h3>
+                    <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="language-javascript">const data = {
+  study_hours: 5.5,
+  attendance: 85,
+  previous_score: 72,
+  // ... resto de parámetros
+};
+
+fetch('https://your-api.com/api/predict', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(result => {
+  console.log('Predicción:', result.prediction);
+  console.log('Categoría:', result.performance_category.category);
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Errors -->
+        <div id="errors" class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-exclamation-triangle text-indigo-600 mr-3"></i>
+                Códigos de Error
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Código</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Descripción</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Solución</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 text-sm">
+                        <tr>
+                            <td class="px-4 py-3 font-mono font-bold">400</td>
+                            <td class="px-4 py-3">Bad Request - Datos inválidos</td>
+                            <td class="px-4 py-3">Verificar formato JSON y campos requeridos</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-mono font-bold">404</td>
+                            <td class="px-4 py-3">Not Found - Endpoint no existe</td>
+                            <td class="px-4 py-3">Revisar URL del endpoint</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-mono font-bold">500</td>
+                            <td class="px-4 py-3">Internal Server Error</td>
+                            <td class="px-4 py-3">Contactar soporte técnico</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-mono font-bold">503</td>
+                            <td class="px-4 py-3">Service Unavailable - Modelo no cargado</td>
+                            <td class="px-4 py-3">Reiniciar servidor o reentrenar modelo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white shadow-lg mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center text-gray-600 text-sm">
+                <p class="mb-2">
+                    Student Performance Predictor API v1.0.0 |
+                    Universidad del Valle - Maestría CODING
+                </p>
+                <p class="text-xs">
+                    <strong>Nestor Cardona</strong> (202502968), <strong>Carlos Tovar</strong> (202503011) & <strong>Yolima Guadir</strong> (202502581)
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
