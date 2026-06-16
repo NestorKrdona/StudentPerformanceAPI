@@ -1,0 +1,147 @@
+================================================================================
+SUITE DE PRUEBAS - STUDENT PERFORMANCE API
+================================================================================
+
+================================================================================
+TEST 1: Health Check
+================================================================================
+Status Code: 200
+{
+  "model_metrics": {
+    "mae": 4.6676,
+    "r2": 0.829,
+    "rmse": 6.2038
+  },
+  "model_name": "SVR_Optimized",
+  "status": "ok",
+  "timestamp": "2026-06-16T01:00:36.460173",
+  "trained_date": "2026-06-15T23:54:59.615871"
+}
+
+================================================================================
+TEST 2: Model Info
+================================================================================
+Status Code: 200
+Mejor Modelo: SVR_Optimized
+Número de Features: 14
+R² Score: 0.8290
+
+================================================================================
+TEST 3: Predicción Individual
+================================================================================
+Datos del estudiante:
+{
+  "study_hours": 6,
+  "attendance": 90,
+  "sleep_hours": 8,
+  "internet_usage": 3,
+  "assignments_completed": 10,
+  "previous_score": 75,
+  "placement_status": "Placed"
+}
+
+Status Code: 200
+
+📊 RESULTADOS:
+  Predicción: 98.56 puntos
+  Categoría: Excelente
+  Descripción: Rendimiento sobresaliente
+  Intervalo de Confianza: [86.40, 100.00]
+  Modelo Usado: SVR_Optimized
+  R² del Modelo: 0.8290
+
+================================================================================
+TEST 4: Predicción por Lotes
+================================================================================
+Status Code: 200
+Total de estudiantes: 3
+Predicciones exitosas: 3
+
+Estudiante 0:
+  Predicción: 100.24
+  Categoría: Excelente
+Estudiante 1:
+  Predicción: 54.17
+  Categoría: En Riesgo
+Estudiante 2:
+  Predicción: 79.39
+  Categoría: Bueno
+
+================================================================================
+TEST 5: Modelos Disponibles
+================================================================================
+Status Code: 200
+
+📦 Modelos Disponibles:
+  Modelo por defecto: SVR_Optimized
+
+  Modelos cargados:
+    • GradientBoosting_Optimized
+      - R²: 0.8229
+      - RMSE: 6.3126
+      - MAE: 4.8338
+    • RandomForest_Optimized
+      - R²: 0.8183
+      - RMSE: 6.3943
+      - MAE: 4.7309
+    • SVR_Optimized
+      - R²: 0.8290
+      - RMSE: 6.2038
+      - MAE: 4.6676
+
+================================================================================
+TEST 6: Selección de Modelos
+================================================================================
+Probando el mismo estudiante con diferentes modelos:
+
+Datos: study_hours=6, attendance=85, previous_score=72
+
+✅ SVR_Optimized:
+   Predicción: 81.34
+   Categoría: Bueno
+   R² del modelo: 0.8290
+✅ GradientBoosting_Optimized:
+   Predicción: 83.66
+   Categoría: Bueno
+   R² del modelo: 0.8229
+✅ RandomForest_Optimized:
+   Predicción: 84.90
+   Categoría: Bueno
+   R² del modelo: 0.8183
+
+📊 Comparación de Predicciones:
+   Rango: 81.34 - 84.90
+   Promedio: 83.30
+
+================================================================================
+TEST 7: Verificación de Feature Engineering
+================================================================================
+Datos de entrada:
+{
+  "study_hours": 8,
+  "attendance": 100,
+  "sleep_hours": 8,
+  "internet_usage": 2,
+  "assignments_completed": 10,
+  "previous_score": 90
+}
+
+Features Calculados Esperados:
+  Cognitive Efficiency: 1.0000
+  Academic Engagement: 10.00
+  Previous Score Quartile: Q4_Excellent (score >= 80)
+
+✅ Predicción exitosa
+  Predicción: 82.23
+  Categoría: Bueno
+
+📈 Análisis:
+  - Eficiencia cognitiva de 1.00 (estudio/sueño equilibrado)
+  - Compromiso académico de 10% (excelente)
+  - Rendimiento previo en cuartil superior (Q4)
+  → Predicción esperada: ALTA (>80)
+  → Predicción obtenida: 82.23
+
+================================================================================
+✅ TODAS LAS PRUEBAS COMPLETADAS
+================================================================================
